@@ -4,6 +4,10 @@
 
 ## Quick start
 
+### .env Configuration
+
+rename the `.env.example` to `.env` and set the values
+
 ### Running container
 
 ```sh

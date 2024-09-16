@@ -4,7 +4,7 @@ namespace App\Services;
 
 use PDO;
 use PDOException;
-use App\Helpers\Env;
+use App\Helpers\Config;
 
 class Database
 {
@@ -14,11 +14,11 @@ class Database
     private function __construct()
     {
         $config = [
-            'host' => Env::get('DB_HOST'),
-            'port' => Env::get('DB_PORT'),
-            'dbname' => Env::get('DB_NAME'),
-            'user' => Env::get('DB_USER'),
-            'password' => Env::get('DB_PASSWORD')
+            'host' => Config::get('database.host'),
+            'port' => Config::get('database.port'),
+            'dbname' => Config::get('database.dbname'),
+            'user' => Config::get('database.user'),
+            'password' => Config::get('database.password')
         ];
 
         $this->connect($config);

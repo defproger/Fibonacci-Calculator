@@ -5,12 +5,20 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client \
     git \
     zsh \
+    nodejs \
+    npm \
     libzip-dev \
     zip \
     && docker-php-ext-install mysqli pdo pdo_mysql zip sockets
 
 # Включение модулей Apache
 RUN a2enmod rewrite
+
+# Установка oh-my-zsh для удобства работы в контейнере
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Установка Composer для управления зависимостями
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Установка рабочей директории
 WORKDIR /var/www/html
@@ -30,6 +38,9 @@ RUN echo "<Directory /var/www/html/public>\n\
     AllowOverride All\n\
     Require all granted\n\
     </Directory>" >> /etc/apache2/apache2.conf
+
+run composer install \
+    && npm install
 
 # Открытие портов
 EXPOSE 80

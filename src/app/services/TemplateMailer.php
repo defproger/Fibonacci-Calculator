@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\Config;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -19,7 +20,13 @@ class TemplateMailer
 
     private function setupMailer()
     {
-        $config = require __DIR__ . '/../../config/mail.php';
+        $config = [
+            'host' => Config::get('mail.host'),
+            'username' => Config::get('database.username'),
+            'password' => Config::get('database.password'),
+            'address' => Config::get('database.address'),
+            'addressName' => Config::get('database.addressName')
+        ];
 
         $this->mail->isSMTP();
         $this->mail->Host = $config['host'];

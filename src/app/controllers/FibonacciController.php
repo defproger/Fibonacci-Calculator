@@ -23,6 +23,10 @@ class FibonacciController extends BaseController
             return $this->response(['error' => 'Invalid input'], true, 400);
         }
 
+        if ($number > 1476) {
+            return $this->response(['error' => 'Number is too large'], true, 400);
+        }
+
         $result = $this->fibonacci($number);
 
         $this->db->insert('fibonacci_requests', [
@@ -76,22 +80,25 @@ class FibonacciController extends BaseController
 
     public function getHistory($params)
     {
-        $start = $params['start'] ?? 0;
-        $length = $params['length'] ?? 10;
+        $start = +$params['start'] ?? 0;
+        $length = +$params['length'] ?? 10;
         $searchValue = $params['search']['value'] ?? '';
-        $orderColumnIndex = $params['order'][0]['column'] ?? 0;
-        $orderDirection = $params['order'][0]['dir'] ?? 'desc';
 
-        $columns = ['username', 'user_input', 'fibonacci_number'];
+        $orderColumnIndex = $params['order'][0]['column'] ?? 0;
+        $orderDirection = in_array($params['order'][0]['dir'], ['asc', 'desc']) ? $params['order'][0]['dir'] : 'desc';
+
+        $columns = ['id', 'username', 'user_input', 'fibonacci_number'];
         $orderBy = $columns[$orderColumnIndex] ?? 'id';
 
         $query = "SELECT * FROM fibonacci_requests 
-              WHERE username LIKE :search OR user_input LIKE :search or fibonacci_number LIKE :search
+              WHERE username LIKE :search 
+              OR user_input LIKE :search 
+              OR fibonacci_number LIKE :search
               ORDER BY $orderBy $orderDirection 
               LIMIT $start, $length";
 
         $data = $this->db->queryAll($query, [
-            'search' => "%$searchValue%"
+            'search' => "%$searchValue%",
         ]);
 
         $totalQuery = "SELECT COUNT(*) as total FROM fibonacci_requests";
@@ -99,19 +106,23 @@ class FibonacciController extends BaseController
 
         if ($searchValue != '') {
             $searchCount = "SELECT COUNT(*) as total FROM fibonacci_requests
-                         WHERE username LIKE :search OR user_input LIKE :search or fibonacci_number LIKE :search";
+                        WHERE username LIKE :search 
+                        OR user_input LIKE :search 
+                        OR fibonacci_number LIKE :search";
             $recordsFiltered = $this->db->query($searchCount, [
                 'search' => "%$searchValue%"
             ])['total'];
+        } else {
+            $recordsFiltered = $total;
         }
 
         $response = [
             'draw' => $params['draw'] ?? 1,
             'recordsTotal' => $total,
-            'recordsFiltered' => $recordsFiltered ?? $total,
+            'recordsFiltered' => $recordsFiltered,
             'data' => $data
         ];
 
-        echo json_encode($response);
+        $this->response($response);
     }
 }

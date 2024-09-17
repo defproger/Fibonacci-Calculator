@@ -8,10 +8,12 @@ $(document).ready(function () {
             }
         },
         columns: [
+            {data: 'id', visible: false},
             {data: 'username'},
             {data: 'user_input'},
             {data: 'fibonacci_number'}
         ],
+        order: [[0, 'desc']],
         paging: true,
         serverSide: true
     });
@@ -39,14 +41,29 @@ $(document).ready(function () {
             dataType: 'json',
             data: $(this).serialize(),
             success: function (response) {
-                console.log(response)
-                $('#loadingOverlay').removeClass('visible');
-                $('#result').html('<div class="alert alert-success">Fibonacci Number: ' + response.fibonacci + '</div>');
+                setTimeout(function () {
+                    $('#loadingOverlay').removeClass('visible');
+                    $('#result').html('<div class="alert alert-success">Fibonacci Number: ' + response.fibonacci + '</div>');
+                    table.ajax.reload();
+                }, 300);
             },
             error: function () {
-                $('#loadingOverlay').removeClass('visible');
-                $('#result').html('<div class="alert alert-danger">Error calculating Fibonacci number.</div>');
+                setTimeout(function () {
+                    $('#loadingOverlay').removeClass('visible');
+                    $('#result').html('<div class="alert alert-danger">Error calculating Fibonacci number.</div>');
+                }, 1000);
+
             }
         });
+    });
+
+    $('#themeButton').click(function () {
+        $('body').toggleClass('dark-mode light-mode');
+        let icon = $('.theme-button img');
+        if ($('body').hasClass('light-mode')) {
+            icon.attr('src', '/assets/img/moon.svg');
+        } else {
+            icon.attr('src', '/assets/img/sun.svg');
+        }
     });
 });

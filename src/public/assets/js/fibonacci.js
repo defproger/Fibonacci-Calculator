@@ -23,7 +23,7 @@ $(document).ready(function () {
 
         let username = $('#username').val();
         let number = $('#number').val();
-        let usernamePattern = /^[A-Za-z]{1,15}$/;
+        let usernamePattern = /^[A-Za-z]{3,15}$/;
 
         if (!usernamePattern.test(username)) {
             $('#result').html('<div class="alert alert-danger">Username must contain only letters and be no longer than 15 characters.</div>');

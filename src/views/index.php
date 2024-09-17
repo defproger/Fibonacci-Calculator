@@ -157,7 +157,7 @@
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required
-                           pattern="[A-Za-z]{1,15}">
+                           pattern="[A-Za-z]{3,15}">
                     <div class="invalid-feedback">Username must be only letters, and no more than 15 characters.</div>
                 </div>
                 <div class="mb-3">

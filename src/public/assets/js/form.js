@@ -18,17 +18,12 @@ $(document).ready(function () {
         serverSide: true
     });
 
-    $('#tabTable').click(function () {
-        $('#tableTab').show();
-        $('#historyTab').hide();
-        $('.nav-link').removeClass('active');
-        $(this).addClass('active');
-    });
+    $('.tab-link').click(function () {
+        let selectedTab = $(this).data('tab');
+        $('.tab-pane').hide();
+        $('#' + selectedTab).show();
 
-    $('#tabHistory').click(function () {
-        $('#historyTab').show();
-        $('#tableTab').hide();
-        $('.nav-link').removeClass('active');
+        $('.tab-link').removeClass('active');
         $(this).addClass('active');
     });
 

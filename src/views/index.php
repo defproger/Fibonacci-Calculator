@@ -7,69 +7,173 @@
     <link href="/assets/css/main.css" rel="stylesheet">
 </head>
 <body class="dark-mode">
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Fibonacci App</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a id="tabTable" class="nav-link active" href="#">Graphics</a>
-                </li>
-                <li class="nav-item">
-                    <a id="tabHistory" class="nav-link" href="#">History</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<div class="container-fluid main-content">
-    <div class="row">
-        <div class="col-lg-8 left-section">
-            <div id="tableTab" class="card tab-content active">
-                <h2>Table</h2>
-                <table id="fibonacciTable" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
+<div class="row m-3">
+    <div class="col-lg-8 p-4">
+        <nav class="navbar navbar-expand-lg navbar-dark mb-2">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Fibonacci App</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active tab-link" href="#" data-tab="tableTab">Graphics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tab-link" href="#" data-tab="historyTab">History</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="tab-content card p-3">
+            <div id="tableTab" class="tab-pane active">
+                <div class="container mt-4">
+                    <h3>Table</h3>
+                    <table id="fibonacciTable" class="table m-2">
+                        <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>#</th>
                             <th>Username</th>
                             <th>User Input</th>
                             <th>Fibonacci Number</th>
                         </tr>
-                    </thead>
-                </table>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
-            <div id="historyTab" class="card tab-content">
-                <h2>History of Fibonacci</h2>
-                <p>Fibonacci numbers are a sequence of numbers first introduced in "Liber Abaci"...</p>
-            </div>
-        </div>
-        <div class="col-lg-4 right-section">
-            <div class="card calculator-card">
-                <h2>Fibonacci Calculator</h2>
-                <form id="fibonacciForm" method="POST">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+
+            <div id="historyTab" class="tab-pane">
+                <div class="container mt-4">
+                    <h2>History of Fibonacci</h2>
+                    <div>
+                        <h2>The Fascinating History of Fibonacci Numbers 🌟</h2>
+
+                        <p>Fibonacci numbers are a <strong>sequence of numbers</strong> first introduced in the famous
+                            book <em>Liber
+                                Abaci</em> by the Italian mathematician <strong>Leonardo of Pisa</strong>, also known as
+                            Fibonacci. But why are these numbers so special? Let’s dive into the <strong>exciting
+                                world</strong>
+                            of Fibonacci numbers and their incredible applications!</p>
+
+                        <div class="badge bg-warning text-dark">Did you know?</div>
+                        <p><strong>Fibonacci numbers</strong> follow a simple rule:<br>
+                            Each number is the sum of the two preceding ones!<br>
+                            So, the sequence looks like this:<br>
+                            <strong>0, 1, 1, 2, 3, 5, 8, 13, 21... and so on!</strong></p>
+
+                        <p>But here’s where things get interesting! 🌀 Fibonacci didn’t invent these numbers himself. He
+                            discovered them while studying how <strong>rabbits reproduce</strong>! Imagine you have a
+                            pair of
+                            rabbits, and every month, they have baby rabbits. Fibonacci realized that the number of
+                            rabbit pairs
+                            follows this unique sequence.</p>
+
+                        <div class="badge bg-success text-white">Amazing Fact!</div>
+                        <p>Fibonacci numbers are everywhere in <strong>nature</strong>! 🌱 You can see them in:</p>
+                        <ul>
+                            <li>The number of petals on a flower</li>
+                            <li>The arrangement of leaves on a stem</li>
+                            <li>Pinecones, sunflowers, and even the spiral shells of sea creatures 🐚</li>
+                        </ul>
+
+                        <h3><strong>Fibonacci & The Golden Ratio 🌟</strong></h3>
+                        <p>Now, let’s talk about something <strong>truly magical</strong>: the <strong>Golden
+                                Ratio</strong>! ✨
+                        </p>
+
+                        <p>When you divide a Fibonacci number by the previous number in the sequence, you get a number
+                            <strong>very
+                                close</strong> to 1.618... This is the <strong>Golden Ratio</strong> (also known as
+                            <strong>Phi</strong> or <strong>Φ</strong>). It appears in <strong>art</strong>,
+                            <strong>architecture</strong>,
+                            and even in the proportions of the <strong>human body</strong>! 🤯</p>
+
+                        <div class="text-primary">For example:</div>
+                        <ul>
+                            <li>If you take the 13th and 14th Fibonacci numbers: <strong>233 ÷ 144 = 1.618...</strong>
+                            </li>
+                        </ul>
+
+                        <div class="text-warning">Fun Fact:</div>
+                        <p>The Golden Ratio has been used by artists like <strong>Leonardo da Vinci</strong> to create
+                            <strong>perfectly
+                                balanced</strong> and <strong>beautiful</strong> compositions. You can see it in famous
+                            works
+                            like the <strong>Mona Lisa</strong> and even in ancient Greek architecture like the
+                            <strong>Parthenon</strong>!
+                        </p>
+
+                        <h3><strong>Fibonacci in Modern Life 🌍</strong></h3>
+                        <p>You may be wondering, "Okay, that’s cool, but how are Fibonacci numbers used today?" Well,
+                            Fibonacci
+                            numbers have found their way into <strong>modern science</strong>,
+                            <strong>engineering</strong>, and
+                            even <strong>computer algorithms</strong>!</p>
+
+                        <div class="badge bg-primary text-white">Did you know?</div>
+                        <p>Fibonacci numbers are used in:</p>
+                        <ul>
+                            <li><strong>Stock market analysis</strong> 📈 — Traders use Fibonacci retracement levels to
+                                predict
+                                market movements!
+                            </li>
+                            <li><strong>Data structures and algorithms</strong> in computer science 💻</li>
+                            <li><strong>Cryptography</strong> for securing digital information 🔒</li>
+                        </ul>
+
+                        <h3><strong>Fibonacci in Gaming 🎮</strong></h3>
+                        <p>If you think Fibonacci numbers are only for math nerds, think again! Some game developers
+                            have
+                            cleverly used Fibonacci sequences in level design, character health, and even in scoring
+                            systems. It
+                            adds a subtle layer of balance that makes the game feel <strong>just right</strong>.</p>
+
+                        <div class="badge bg-warning text-dark">Pro Tip:</div>
+                        <p>Next time you’re playing your favorite game, try to spot the <strong>Fibonacci
+                                sequence</strong> in
+                            the way levels are structured or how challenges increase!</p>
+
+                        <hr>
+
+                        <div class="text-primary"><strong>The world of Fibonacci numbers is an adventure! 🌟</strong>
+                        </div>
+                        <p>From <strong>rabbits</strong> to <strong>stock markets</strong>, and even the <strong>Golden
+                                Ratio</strong>, these numbers pop up in the most surprising places. Whether you’re
+                            designing a
+                            building, painting a masterpiece, or simply enjoying nature, Fibonacci numbers make the
+                            world a more
+                            <strong>harmonious</strong> and <strong>beautiful</strong> place.</p>
                     </div>
-                    <div class="mb-3">
-                        <label for="number" class="form-label">Enter a number</label>
-                        <input type="number" class="form-control" id="number" name="number" min="0" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-                <div id="result" class="mt-3"></div>
-                <div id="loadingOverlay" class="loading-overlay">Loading...</div>
-            </div>
-            <div class="footer">
-                <p>Made by <a href="https://github.com/defProger" class="text-warning" target="_blank">DefProger</a> with Love</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="theme-toggle">
-        <button id="themeButton" class="theme-button">
-            <img src="/assets/img/sun.svg" class="sun-icon" />
-        </button>
+    <div class="col-lg-4 d-flex flex-column align-items-center justify-content-center h-100 ">
+        <div class="card bg-dark text-white p-3">
+            <h2>Fibonacci Calculator</h2>
+            <form id="fibonacciForm" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="number" class="form-label">Enter a number</label>
+                    <input type="number" class="form-control" id="number" name="number" min="0" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="result" class="mt-3"></div>
+            <div id="loadingOverlay" class="loading-overlay">Loading...</div>
+        </div>
+        <div class="footer">
+            <p>Made by <a href="https://github.com/defProger" class="text-warning" target="_blank">DefProger</a>
+                with Love</p>
+        </div>
     </div>
 </div>
 

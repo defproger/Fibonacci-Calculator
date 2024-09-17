@@ -153,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 d-flex flex-column align-items-center justify-content-center h-100 ">
+    <div class="col-lg-4 d-flex flex-column align-items-center justify-content-center end-0 top-0 vh-100 position-fixed">
         <div class="card bg-dark text-white p-3">
             <h2>Fibonacci Calculator</h2>
             <form id="fibonacciForm" method="POST">

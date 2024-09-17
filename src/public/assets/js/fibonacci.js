@@ -18,15 +18,6 @@ $(document).ready(function () {
         serverSide: true
     });
 
-    $('.tab-link').click(function () {
-        let selectedTab = $(this).data('tab');
-        $('.tab-pane').hide();
-        $('#' + selectedTab).show();
-
-        $('.tab-link').removeClass('active');
-        $(this).addClass('active');
-    });
-
     $('#fibonacciForm').on('submit', function (e) {
         e.preventDefault();
 
@@ -40,7 +31,7 @@ $(document).ready(function () {
         }
 
         if (isNaN(number) || number < 0 || number > 1000000) {
-            $('#result').html('<div class="alert alert-danger">Please enter a number between 0 and 1000.</div>');
+            $('#result').html('<div class="alert alert-danger">Please enter a number between 0 and 1000000.</div>');
             return;
         }
 
@@ -64,17 +55,5 @@ $(document).ready(function () {
                 }, 1000);
             }
         });
-    });
-
-    $('#themeButton').click(function () {
-        $('body').toggleClass('bg-dark text-light bg-light text-dark');
-        $('.navbar').toggleClass('navbar-dark');
-
-        let icon = $('#themeButton img');
-        if ($('body').hasClass('bg-light')) {
-            icon.attr('src', '/assets/img/moon.svg');
-        } else {
-            icon.attr('src', '/assets/img/sun.svg');
-        }
     });
 });

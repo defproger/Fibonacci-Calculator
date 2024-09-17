@@ -15,12 +15,22 @@ class FibonacciController extends BaseController
 
     public function calculateFibonacci($post)
     {
-        $username = $post['username'];
-        $number = intval($post['number']);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        if (!isset($post['username']) || !is_string($post['username']) || strlen($post['username']) < 3 || strlen($post['username']) > 20) {
+            $this->response(['error' => 'Invalid username. It must be a string between 3 and 20 characters.'], true, 400);
+        }
 
-        if (empty($username) || $number < 0) {
-            return $this->response(['error' => 'Invalid input'], true, 400);
+        $username = htmlspecialchars(trim($post['username']), ENT_QUOTES, 'UTF-8');
+
+        if (!isset($post['number']) || !is_numeric($post['number']) || intval($post['number']) < 0 || intval($post['number']) > 1000) {
+            $this->response(['error' => 'Invalid number. Please provide a number between 0 and 1000.'], true, 400);
+        }
+
+        $number = intval($post['number']);
+
+        $ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
+
+        if (!$ip) {
+            $this->response(['error' => 'Could not determine your IP address.'], true, 500);
         }
 
         if ($number > 1476) {
@@ -80,15 +90,23 @@ class FibonacciController extends BaseController
 
     public function getHistory($params)
     {
-        $start = +$params['start'] ?? 0;
-        $length = +$params['length'] ?? 10;
-        $searchValue = $params['search']['value'] ?? '';
-
-        $orderColumnIndex = $params['order'][0]['column'] ?? 0;
-        $orderDirection = in_array($params['order'][0]['dir'], ['asc', 'desc']) ? $params['order'][0]['dir'] : 'desc';
-
         $columns = ['id', 'username', 'user_input', 'fibonacci_number'];
+
+        $start = isset($params['start']) && is_numeric($params['start']) ? max(0, (int)$params['start']) : 0;
+        $length = isset($params['length']) && is_numeric($params['length']) && (int)$params['length'] > 0 ? min(100, (int)$params['length']) : 10;
+
+        $searchValue = isset($params['search']['value']) ? htmlspecialchars(trim($params['search']['value']), ENT_QUOTES, 'UTF-8') : '';
+
+        $orderColumnIndex = isset($params['order'][0]['column']) && is_numeric($params['order'][0]['column']) && (int)$params['order'][0]['column'] >= 0 && (int)$params['order'][0]['column'] < count($columns)
+            ? (int)$params['order'][0]['column']
+            : 0;
+
+        $orderDirection = isset($params['order'][0]['dir']) && in_array(strtolower($params['order'][0]['dir']), ['asc', 'desc'])
+            ? strtolower($params['order'][0]['dir'])
+            : 'desc';
+
         $orderBy = $columns[$orderColumnIndex] ?? 'id';
+
 
         $query = "SELECT * FROM fibonacci_requests 
               WHERE username LIKE :search 

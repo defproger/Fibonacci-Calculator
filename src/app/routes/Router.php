@@ -21,7 +21,7 @@ class Router
      * Метод для обработки POST-запросов
      *
      * @param string $url
-     * @param callable $func
+     * @param callable $func )
      */
     public function post($url, $func)
     {
@@ -52,16 +52,28 @@ class Router
     public function resolve()
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
-        $requestUri = $_SERVER['REQUEST_URI'];
+        $requestUri = $this->getCleanUri();
 
         foreach ($this->routes as $route) {
             if ($requestMethod === $route['method'] && preg_match($route['pattern'], $requestUri, $matches)) {
-                return $route['func']($matches);
+                return $route['func']($matches, $_GET, $_POST);
             }
         }
 
         http_response_code(404);
         echo json_encode(['error' => 'Route not found']);
         exit();
+    }
+
+    /**
+     * Метод для очистки URI от GET-параметров
+     *
+     * @return string Чистый URI без GET-параметров
+     */
+    protected function getCleanUri()
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+        $uri = parse_url($uri, PHP_URL_PATH);
+        return $uri;
     }
 }

@@ -2,6 +2,14 @@
 
 ### Description
 
+- PHP MVC
+- Docker
+- Webpack
+- MySQL
+- NPM
+- jQuery
+- Bootstrap
+
 ## Quick start
 
 ### .env Configuration
@@ -40,7 +48,8 @@ Once dependencies are installed, build the assets using Webpack:
 ```sh
 docker exec -it calculator-web npx webpack --mode production
 ```
-or 
+
+or
 
 ```sh
 docker exec -it calculator-web npx webpack --watch --mode development

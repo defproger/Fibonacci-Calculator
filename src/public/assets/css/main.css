@@ -3,10 +3,10 @@
   bottom: 20px;
   right: 20px;
   z-index: 1000;
+}
 
-  img {
-    width: 30px;
-  }
+#themeButton img {
+  width: 30px;
 }
 
 .loading-overlay {
@@ -20,19 +20,16 @@
   justify-content: center;
   align-items: center;
   color: white;
-
-  &.visible {
-    display: flex;
-  }
 }
 
-.tab-content {
-  .tab-pane {
-    display: none;
+.loading-overlay.visible {
+  display: flex;
+}
 
-    &.active {
-      display: block;
-    }
-  }
+.tab-content .tab-pane {
+  display: none;
+}
 
+.tab-content .tab-pane.active {
+  display: block;
 }
